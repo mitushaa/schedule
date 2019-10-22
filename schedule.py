@@ -2,40 +2,38 @@
 #自訂時間&排程任務
 
 
-import datetime,os,platform
-'''
-def run_Task():
-         os_platfrom = platform.platform()
-         if os_platfrom.startswith('Darwin'):
-                  print 'this is mac os system'
-                  os.system('ls')
-         elif os_platfrom.startswith('Window'):
-                  print 'this is window system'
-                  os.system('dir')
-                  os.system('pause')
-'''
-def run_Task():
-         print "successful"
 
-def timerFun(sched_Timer):
-         flag = 0
-         while True:
-                  now = datetime.datetime.now()
-                  now = now.strftime('%Y-%m-%d %H:%M:%S')
-                  #now=datetime.datetime.strptime(now,'%Y-%m-%d %H:%M:%S')
-                  sched = sched_Timer.strftime('%Y-%m-%d %H:%M:%S')
-                  if (now == sched) & (flag == 0):
-                           run_Task()
-                           flag = 1
-                  elif (now > sched):
-                           print 'Time has passed'
-                           break;
-                  else:
-                           if flag==1:
-                                    sched_Timer = sched_Timer+datetime.timedelta(seconds=5)
-                                    
-if __name__ == '__main__':
-         sched_Timer = datetime.datetime(2018,11,19,9,33,00)
-         #sched_Timer_display = sched_Timer.strftime('%Y-%m-%d %H:%M:%S')
-         print 'run the time task at {0}'.format(sched_Timer)
-         timerFun(sched_Timer)
+# Schedule Library imported
+import schedule
+import time
+# Setting up the functions
+def morning_yoga():
+print("Get up and do yoga")
+def work():
+print("Get ready for work!")
+def lunch_time():
+print("Have healthy lunch!")
+def break_time():
+print("relax for sometime!")
+def drink_water():
+print("Stay hydrated")
+def bedtime():
+print("Go to bed early!")
+def visit_market():
+print("Go to the market!")
+#Scheduling the tasks
+#Every day at 5:00 am morning_yoga() is called
+schedule.every().day.at("05:00").do(morning_yoga)
+#Every 30 mins drink_water() is called
+schedule.every(30).minutes.do(drink_water)
+#Every 3 hour break_time() is called
+schedule.every(3).hour.do(break_time)
+#Every day at 21:00 pm bedtime() is called
+schedule.every().day.at("21:00").do(bedtime)
+#Every wednesday at 19.30 pm visit_market()is called
+schedule.every().wednesday.at("19:30").do(visit_market)
+# Creating a loop so that the scheduling task keeps on running all time
+while True:
+#Checks whether the scheduled task is running or not
+schedule.run_pending()
+time.sleep(1)
