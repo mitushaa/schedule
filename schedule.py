@@ -24,7 +24,7 @@ print("Go to the market!")
 #Scheduling the tasks
 
 
-#Every day at 5:00 am morning_yoga() is called
+#Every day at 5:00  morning_yoga() is called
 schedule.every().day.at("05:00").do(morning_yoga)
 #Every 30 mins drink_water() is called
 schedule.every(60).minutes.do(drink_water)
